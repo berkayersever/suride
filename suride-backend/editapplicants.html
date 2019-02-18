@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang = "en" ng-app= "applicants_form">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Angular Material style sheet -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+
+<link rel="stylesheet" href="material-start/styles/main.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc2/angular-material.min.css">
+<link rel = "stylesheet"
+   href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+</script>
+
+<!--- google login --------->
+
+<link href="/node_modules/angular-material-time-picker/dist/md-time-picker.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="form.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script src="/node_modules/angular/angular.js"></script>
+<!-- <script src="/node_modules/angular-material-time-picker/index.js"></script> -->
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+</head>
+
+<style>
+.centered {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+</style>
+
+<body  layout="column" ng-cloak class="md-inline-form">
+<md-toolbar  class="md-hue-2" ng-controller="toolbar_ctrl">
+  <div class="md-toolbar-tools">
+
+    <h2 flex="" md-truncate="">Edit Applicants</h2>
+    <span flex></span>
+      
+      </div>
+
+  </div>
+</md-toolbar>
+  <md-content ng-controller="applicant_controller">
+    <md-list-item ng-repeat="applicant in applicants">
+    <p> {{ applicant.name }} </p>
+    <md-checkbox class="md-secondary" ng-model="applicant.wanted"></md-checkbox>
+  </md-list-item>
+
+  <div layout="row" layout-align="center center">
+    <md-button ng-click="save_applicants()" class="md-primary md-raised" >
+           SAVE APPLICANTS
+       </md-button>
+    </div>
+</md-content>
+
+
+
+    <script>
+    angular.module('applicants_form', ['ngMaterial'])
+    .controller('toolbar_ctrl', function($scope,$rootScope, $mdSidenav){
+      var url = new URL(window.location);
+      var id = url.searchParams.get("id");
+
+      
+      $scope.editApplicants = function(){
+        window.open('/editapplicants?id='+id,'targetWindow','toolbar=no, location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=SomeSize,height=SomeSize');
+      };
+
+
+      $scope.myride = false;
+      $scope.$on('userinfo', function(events, args){
+          console.log(args);
+          $scope.user_info = args; //now we've registered!
+          if($scope.user_info.id == id.substring(0,id.length-5)){$scope.myride = true;$scope.apply();}
+        });
+    })
+    .controller('profile_ctrl', function($scope, $rootScope){
+
+        $.get("http://localhost:3000/userinfo",function(data){
+          console.log(data);
+          $scope.user_info = {user_name:data.name,rating:data.rating,ride_count:data.rides, id:data._id};
+          $rootScope.$broadcast('userinfo',$scope.user_info);
+        });
+
+      
+
+    })
+    .controller('applicant_controller', function($scope, $http, $mdDialog){
+      var url = new URL(window.location);
+      var id = url.searchParams.get("id");
+
+      $http({
+        method: 'GET',
+        url: '/getride?id='+id
+      }).then(function successCallback(response) {
+        $scope.ride = response.data;
+        console.log($scope.ride);
+      });
+      
+      $scope.save_applicants = function(ev){
+        var count = 0;
+        $scope.applicants.forEach(function(r){if(r.wanted == true){count++;} });
+
+        if(count>$scope.ride.seats){alert("You cannot add more applicants. No seats left.")}
+        else{
+          var i;
+          for (i = 0; i < count; i++)
+          {
+            $http({
+              method: 'GET',
+              url: '/acceptapplicant?id='+id+'&applicantid='+$scope.applicants[i].id
+            }).then(function successCallback(response) {
+              alert("Applicants have been saved.");
+            });
+          }
+        }
+      };
+
+      $http({
+        method: 'GET',
+        url: '/getapplicants?id='+id
+      }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log(response.data);
+          $scope.applicants = response.data;
+
+          $scope.applicants.forEach(function(r){r.wanted = false;});
+          
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+
+    });
+    
+    </script>
+    
+</body>
+
+</html>

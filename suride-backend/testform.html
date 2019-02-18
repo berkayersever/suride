@@ -1,0 +1,26 @@
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+var formData={
+	dest:{"Lat":"40.992462","Lon":"29.024324"},
+deptime:"12:40",
+seats:3,
+desc:"I am the best"
+};
+
+$.ajax({
+  type: "POST",
+  url: "http://localhost:3000/postride",
+  data: JSON.stringify(formData),
+  success: function(){console.log("worked");},
+  dataType: "json",
+  contentType : "application/json"
+});
+
+// $.post( "postride", formData );
+</script>
+
+ok!!!

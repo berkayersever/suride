@@ -1,0 +1,77 @@
+<script type="text/javascript">
+    var app = angular.module('myApp', ['ngMap']);
+    app.controller('MarkerRemoveCtrl', function(NgMap) {
+      var vm = this;
+      NgMap.getMap().then(map => vm.map = map);
+      vm.positions = [{lat:37.7699298,lng:-122.4469157}];
+
+      vm.addMarker = function(event) {
+        var ll = event.latLng;
+        vm.positions.push({lat:ll.lat(), lng: ll.lng()});
+      }
+      vm.deleteMarkers = function() {
+        vm.positions = [];
+      };
+      vm.showMarkers = function() {
+        for (var key in vm.map.markers) {
+          vm.map.markers[key].setMap(vm.map);
+        };
+      };
+      vm.hideMarkers = function() {
+        for (var key in vm.map.markers) {
+          vm.map.markers[key].setMap(null);
+        };
+      };
+    });
+</script>
+
+
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Choose your destination</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div ng-controller="MarkerRemoveCtrl as vm">
+            Remove Markers<br/>
+            Click on map to add a marker. Click button to show, hide, or remove markers<br/>
+            <div id="panel">
+              <input ng-click="vm.hideMarkers()" type=button value="Hide Markers">
+              <input ng-click="vm.showMarkers()" type=button value="Show All Markers">
+              <input ng-click="vm.deleteMarkers()" type=button value="Delete Markers">
+            </div>
+            <ng-map center="37.7699298, -122.4469157" zoom="12" on-click="vm.addMarker()">
+              <marker
+                ng-repeat="pos in vm.positions" position="{{pos.lat}}, {{pos.lng}}"
+                icon="{path:'CIRCLE', scale: 10, strokeColor: 'red', zIndex:10}"></marker>
+              <marker position="37.7899298, -122.4469157"
+                icon="{path:'CIRCLE', scale: 10, strokeColor: 'red', zIndex:12}"></marker>
+              <marker position="37.7799298, -122.4469157"
+                icon="{path:'CIRCLE', scale: 10, strokeColor: 'green', zIndex:11}"></marker>
+              <marker position="37.7699298, -122.4469157"
+                icon="{path:'CIRCLE', scale: 10, strokeColor: 'blue', zIndex:10}"></marker>
+            </ng-map>
+          </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+        More on Wikipedia
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Not Useful
+      </md-button>
+      <md-button ng-click="answer('useful')">
+        Useful
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

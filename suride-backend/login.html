@@ -1,0 +1,84 @@
+<html>
+<head>
+<!-- Angular Material style sheet -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="google_login.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+</script>
+<script src="/node_modules/angular/angular.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+<script src="jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<style>
+body {
+  background-image: url("http://www.dataplusscience.com/files/DarkContrastTMS.png");
+}
+
+.signinButton{
+  border-color: #494949;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+.signinButtonDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.line-with-icon md-icon {
+    font-size: 1rem;
+    width: inherit;
+    height: 1.2rem;
+    vertical-align: middle;
+  }
+
+  .signupText{
+    flex: 1;
+    padding-right: : 40px;
+    text-align: center;
+  }
+</style>
+
+
+  <body>
+    <div>
+
+
+    <div>
+    <script>
+    $(document).ready( function () {
+      $('#signinButton').click(function() {
+        // signInCallback defined in step 6.
+        auth2.grantOfflineAccess().then(signInCallback);
+      });
+
+      $(window).on('load',function(){
+        $('#loginModal').modal('show');
+    });
+  });
+    </script>
+
+    <!-- Modal -->
+<div class="modal fade" id="loginModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="width:18em;">
+        <button class="btn btn-primary signinButton" id="signinButton"><md-icon i class="material-icons" style="vertical-align: middle;hieght:1.2rem;width: 40px;">directions_car</md-icon>
+          <div class="signupText">
+          Sign in with Sabanci account</div></button>
+    </div>
+  </div>
+</div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang = "en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+
+<link rel="stylesheet" href="material-start/styles/main.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc2/angular-material.min.css">
+<link rel = "stylesheet"
+   href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+<script src="/node_modules/angular/angular.js"></script>
+<script src="profile.js"></script>
+</head>
+
+<body ng-app = "profile" ng-controller="profile_ctrl" ng-cloak>
+  <!-- <div layout-align="center center"> -->
+    <md-card>
+       <md-card-title>
+         <md-card-title-text>
+           <span class="md-headline">{{get_user_name()}}</span>
+           <span class="md-subhead">{{get_rating()}}</span>
+         </md-card-title-text>
+       </md-card-title>
+       <md-card-content layout="row" layout-align="space-between">
+      <div class="md-media-xl card-media">
+        <img src="img/PICA.png"/>
+      </div>
+    </md-card-content>
+     </md-card>
+         <!-- <md-header>
+            <md-avatar>
+              <md-icon i class="material-icons" style="font-size: 2em">account_circle</md-icon>
+            </md-avatar>
+          </md-header>
+          <md-title>
+          <md-actions layout="row" layout-align="center center">
+          <md-content>
+            <p>{{get_user_name()}}</p>
+            <p>{{get_ride_count()}} rides so far.</p>
+            <p>{{get_rating()}}</p>
+          </md-content>
+        </div> -->
+</body>
