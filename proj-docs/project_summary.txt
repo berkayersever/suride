@@ -1,0 +1,19 @@
+"SURide"
+
+Sabanci University being far away from the centre of Istanbul requires students to take shuttles to get to and from the centre. It works. But the timings can be an inconvenience. This results in a lot of students, who are able to, use their cars over these shuttles for convenience. 
+On most instances of such travels made, the cars are mostly empty. This app fills in the gap, literally.
+
+Our idea is to design a car pooling services for Sabanci students. The basic idea would be that if a user owns a car and is traveling to a certain place at a certain time, he would post that on our service. Then users who would like to join him would request a seat in the car. The car owner would then accept the passengers. We are planning to make a single back end on Node.js that would provide REST API's to work with an Android client and a web based client, probably using AngularJS. 
+
+As far as features go, we have come up with the following:
+*Profiles for all users with a rating system
+*A single list of upcoming rides available to users to join - This would include details such as:
+-Destination
+-Time
+-No. of seats available
+-description box for extras like choice of music for example
+*Comment/request section on rides - there is also a possibility of a chat interface between users
+*Request form for joining a ride
+*Only allow Sabanci university's Google accounts - This can be achieved with Google's sign in API
+
+We are planning to focus on important features for scope of this course and have a robust Android client and web client. This is to learn how to get our applications accessed by as many users as possible. We can add or remove features if you require us to. But we have a strong idea of where the application is headed.
