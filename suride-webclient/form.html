@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang = "en" ng-app= "ride_form">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Angular Material style sheet -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+
+<link rel="stylesheet" href="material-start/styles/main.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc2/angular-material.min.css">
+<link rel = "stylesheet"
+   href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+</script>
+
+<!--- google login --------->
+
+<link href="/node_modules/angular-material-time-picker/dist/md-time-picker.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="form.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+<script src="/node_modules/angular/angular.js"></script>
+<!-- <script src="/node_modules/angular-material-time-picker/index.js"></script> -->
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+var formData={
+	dest:{"Lat":"40.992462","Lon":"29.024324"},
+deptime:"12:40",
+seats:3,
+desc:"I am the best"
+};
+
+$.ajax({
+  type: "POST",
+  url: "http://localhost:3000/postride",
+  data: JSON.stringify(formData),
+  success: function(){console.log("worked");},
+  dataType: "json",
+  contentType : "application/json"
+});
+
+// $.post( "postride", formData );
+</script>
+
+</head>
+
+
+
+<body ng-controller = "form_ctrl" layout= "column" ng-cloak class="md-inline-form">
+  <md-content layout-padding>
+    <form name="rideForm">
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Destination</label>
+          <md-select ng-model="form.destination">
+            <md-option ng-repeat="destination in destinations" value="{{destination.abbrev}}">
+              {{destination.abbrev}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Enter Time of Departure</label>
+            <input ng-model="form.time_of_departure">
+        </md-input-container>
+      </div>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Seats Available In The Ride</label>
+          <input required type="number" step="any" name="available_seats" ng-model = "form.available_seats" min="1"
+         max="4" ng-pattern="/^1234$/" />
+       </div>
+         <!-- <div ng-messages="rideForm.available_seats.$error" multiple md-auto-hide="false"></div> -->
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Description</label>
+          <textarea ng-model="form.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+      </div>
+
+  </form>
+  <div>
+    <md-button class="md-fab md-primary" aria-label="Eat cake">
+           <i class="material-icons">directions_car</i>
+       </md-button>
+    </div>
+
+ </md-content>
+
+
+
+</body>
+</html>
