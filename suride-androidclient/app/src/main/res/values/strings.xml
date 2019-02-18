@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SU Ride</string>
+    <!--<string name="server_client_id">783185784468-e3g1j42l9jlvvoulj6rm6j0fbuk03giu.apps.googleusercontent.com</string>-->
+    <string name="server_client_id">265491867494-tug05d6b9bai3aglibmtr09ll80l8blh.apps.googleusercontent.com</string>
+</resources>

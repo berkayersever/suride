@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="10dp"
+    android:layout_height="10dp">
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_person_pin_black_24dp"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/navigation_rides"
+        android:icon="@drawable/ic_motorcycle_black_24dp"
+        android:title="Rides" />
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_development"-->
+        <!--android:icon="@drawable/ic_music_note_black_24dp"-->
+        <!--android:title="Development"/>-->
+
+</menu>
